@@ -24,6 +24,7 @@
     "@sanity/production-preview": "^2.2.6",
     "@sanity/vision": "^2.2.6",
     "prop-types": "^15.7",
+    "next": "10.0.7",
     "react": "^17.0",
     "react-dom": "^17.0"
   },
