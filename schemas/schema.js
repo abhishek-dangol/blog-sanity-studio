@@ -134,5 +134,48 @@ export default createSchema({
         },
       ],
     },
+    {
+      name: "comment",
+      type: "document",
+      title: "Comment",
+      fields: [
+        {
+          name: "name",
+          type: "string",
+        },
+        {
+          name: "approved",
+          title: "Approved",
+          type: "boolean",
+          description: "Comments won't show on the site without approval",
+        },
+        {
+          name: "email",
+          type: "string",
+        },
+        {
+          name: "comment",
+          type: "text",
+        },
+        {
+          name: "blog",
+          type: "reference",
+          to: [{ type: "blog" }],
+        },
+      ],
+      preview: {
+        select: {
+          name: "name",
+          comment: "comment",
+          post: "blog.title",
+        },
+        prepare({ name, comment, post }) {
+          return {
+            title: `${name} on ${post}`,
+            subtitle: comment,
+          };
+        },
+      },
+    },
   ]),
 });
