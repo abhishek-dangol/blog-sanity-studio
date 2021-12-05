@@ -23,6 +23,7 @@
     "@sanity/desk-tool": "^1.149.19",
     "@sanity/production-preview": "^2.2.6",
     "@sanity/vision": "^2.2.6",
+    "chokidar": "^3.5.2",
     "get-youtube-id": "^1.0.1",
     "next": "^12.0.7",
     "prop-types": "^15.7",
