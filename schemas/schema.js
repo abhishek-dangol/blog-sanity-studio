@@ -4,7 +4,34 @@ import createSchema from "part:@sanity/base/schema-creator";
 // Then import schema types from any plugins that might expose them
 import schemaTypes from "all:part:@sanity/base/schema-type";
 
+import youtube from "./youtube";
 // Then we give our schema to the builder and provide the result to Sanity
+
+import React from "react";
+import getYouTubeID from "get-youtube-id";
+
+const YouTubePreview = ({ value }) => {
+  const id = getYouTubeID(value.url);
+  const url = `https://www.youtube.com/embed/${id}`;
+
+  if (!id) {
+    return <div>Missing YouTube URL.</div>;
+  }
+  return (
+    <iframe
+      title="Youtube Preview"
+      width="560"
+      height="315"
+      src={url}
+      title="YouTube video player"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen
+    ></iframe>
+  );
+};
+
+
 export default createSchema({
   // We name our schema
   name: "default",
@@ -103,6 +130,24 @@ export default createSchema({
               type: "code",
               options: {
                 withFilename: true,
+              },
+            },
+            {
+              name: "youtube",
+              type: "object",
+              title: "Youtube Embed",
+              fields: [
+                {
+                  name: "url",
+                  type: "url",
+                  title: "URL",
+                },
+              ],
+              preview: {
+                select: {
+                  url: "url",
+                },
+                component: YouTubePreview,
               },
             },
           ],
